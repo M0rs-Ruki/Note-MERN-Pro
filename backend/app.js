@@ -1,7 +1,9 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import { log } from 'console';
+import path from 'path';
 
-
+dotenv.config(path="./.env");
 const app = express();
 const port = 3000;
 
