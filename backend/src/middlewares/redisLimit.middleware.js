@@ -2,7 +2,7 @@
 import redislimit from '../db/upstash.DB.js';
 
 
-const redislimit = async (req, res, next) => {
+const redisLimit = async (req, res, next) => {
 
     try {
         const ip = req.socket.remoteAddress;
@@ -16,4 +16,4 @@ const redislimit = async (req, res, next) => {
     }
 }
 
-export default redislimit;
+export default redisLimit;

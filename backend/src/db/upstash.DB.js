@@ -1,14 +1,15 @@
 
-import { Redislimit } from '@upstash/redislimit';
+import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import dotenv from 'dotenv';
 dotenv.config({path:"./.env"});
 
 
-const redislimit = new Redislimit({
+const ratelimiter = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Redislimit.fixedWindow(5, '10s'),
+  limiter: Ratelimit.fixedWindow(5, '10 s'), 
   analytics: true,
-})
+  prefix: '@upstash/ratelimit',
+});
 
-export default redislimit;
+export default ratelimiter;
