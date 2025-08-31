@@ -26,6 +26,8 @@ connectDB()
 });
 
 // Middleware
+app.use(express.json());
+
 
 
 // Routes 

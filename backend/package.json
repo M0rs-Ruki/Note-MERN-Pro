@@ -13,7 +13,7 @@
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "author": "",
+  "author": "Anup Pradhan (Mors)",
   "license": "ISC",
-  "description": ""
+  "description": "Backend for MERN stack project"
 }
