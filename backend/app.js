@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { log } from 'console';
-import path from 'path';
-import connectDB from './src/db/connect.db.js';
+import connectDB from './src/db/connect.DB.js';
+import redislimit from './src/middlewares/redisLimit.middleware.js';
 
 dotenv.config({path:"./.env"});
 const app = express();
@@ -27,7 +27,7 @@ connectDB()
 
 // Middleware
 app.use(express.json());
-
+app.use(redislimit);
 
 
 // Routes 

@@ -6,13 +6,25 @@ import { log } from 'console';
 
 const getNotes = async (req, res) => {
     try {
-        const notes = await Note.find();    
+        const notes = await Note.find().sort({createdAt: -1});
         res.status(200).json(notes);
     } catch (error) {
         console.error(`Error getting notes (get): ${error}`);
         res.status(500).json({ message:"Something went wrong in getting notes"});
     }
 };
+
+const getNotesById = async (req, res) => {
+    try {
+        const notes = await Note.findById(req.params.id);
+        if (!notes) return res.status(404).json({message: "Note not found"});
+        res.status(200).send(notes);
+    } catch (error) {
+        console.error(`Error getting notes (get): ${error}`);
+        res.status(500).json({ message:"Something went wrong in getting notes"});
+    }
+}
+
 
 const postNotes = async (req, res) => {
     try {
@@ -30,11 +42,12 @@ const postNotes = async (req, res) => {
     }
 };
 
-const putNotes = async (req, res) => {
+const upNotes = async (req, res) => {
     try {
         const { title, content } = req.body;
-        await Note.findByIdAndUpdate(req.params.id, { title, content });
-        res.status(200).send({message:"Notes is updated successfully"});
+        const updatedNote = await Note.findByIdAndUpdate(req.params.id, { title, content },{ new: true });
+        if (!updatedNote) return res.status(404).json({message: "Note not found"});
+        res.status(200).send(updatedNote);
     } catch (error) {
         console.error(`Error getting notes (Put): ${error}`);
         res.status(500).json({ message:"Something went wrong in updating notes"});
@@ -42,8 +55,17 @@ const putNotes = async (req, res) => {
 };
 
 const deleteNotes = async (req, res) => {
-    res.status(200).send("Notes is deleted successfully");
+    try {
+        const deletedNote = await Note.findByIdAndDelete(req.params.id);
+        if (!deleteNotes) return res.status(404).json({message: "Note not found"});
+        res.status(200).send({message: "Note deleted successfully"});
+    } catch (error) {
+        console.error(`Error getting notes (delete): ${error}`);
+        res.status(500).json({ message:"Something went wrong in Deleteing Notes"});
+    }
 };
 
 
-export { getNotes, postNotes, putNotes, deleteNotes };
+
+
+export { getNotes, getNotesById, postNotes, upNotes, deleteNotes };
