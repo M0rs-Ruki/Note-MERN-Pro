@@ -1,9 +1,19 @@
 
-import React from 'react'
+
+import Navbar from '../components/Navbar.jsx';
+import RateLimitedUl from '../components/RateLimitedUl.jsx';
+
 
 
 const HomePage = () => {
-  return <div>Home Page</div>
+  const [isRateLimited, setIsRateLimited] = useState(false);
+  return (
+    <div className='min-h-screen'>
+      <Navbar/>
+
+      {isRateLimited && <RateLimitedUl/>}
+    </div>
+  )
 }
 
 export default HomePage
