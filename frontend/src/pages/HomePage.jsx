@@ -1,13 +1,9 @@
 
 import React from 'react'
-import Notes from '../components/Notes'
+
 
 const HomePage = () => {
-  return (
-    <div>
-      <Notes />
-    </div>
-  )
+  return <div>Home Page</div>
 }
 
 export default HomePage
